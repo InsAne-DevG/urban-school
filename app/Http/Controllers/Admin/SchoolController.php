@@ -58,7 +58,7 @@ class SchoolController extends Controller
             
             // Create the new school user
             $school = User::create([
-                'id' => (string) Str::uuid(),
+                'unique_id' => (string) Str::uuid(),
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $password,
@@ -67,12 +67,17 @@ class SchoolController extends Controller
             ]);
             
             if($school){
+                if($request->hasFile('image')){
+                    $image = Helper::saveToS3('image',$request->file('image'),'school');
+                }
+                
                 ProfileUser::create([
-                    'id' => (string) Str::uuid(),
+                    'unique_id' => (string) Str::uuid(),
                     'address' => $request->address,
                     'state_id' => $request->state, // Assuming you have a relationship with state
                     'city_id' => $request->city,   // Assuming you have a relationship with city
-                    'user_id' => $school->id
+                    'user_id' => $school->id,
+                    'image' => $image
                 ]);
             }
             session()->flash('toast_message', 'School created successfully!');

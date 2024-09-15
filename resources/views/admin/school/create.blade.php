@@ -21,28 +21,28 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label required-label">School Name</label>
+                                <label class="form-label required-label">School Name<span class="text-danger">*</span></label>
                                 <input type="text" name="name" class="form-control" placeholder="School Name" value="{{ old('name') }}" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label required-label">School Email</label>
+                                <label class="form-label required-label">School Email<span class="text-danger">*</span></label>
                                 <input type="email" name="email" class="form-control" placeholder="School Email" value="{{ old('email') }}" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label required-label">Password</label>
+                                <label class="form-label required-label">Password<span class="text-danger">*</span></label>
                                 <input type="password" name="password" class="form-control" placeholder="Password" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label required-label">School Phone</label>
+                                <label class="form-label required-label">School Phone<span class="text-danger">*</span></label>
                                 <input type="tel" name="phone" class="form-control phone" max="10" maxlength="10" id="phone" placeholder="School Phone" value="{{ old('phone') }}" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label required-label">School Address</label>
+                                <label class="form-label required-label">School Address<span class="text-danger">*</span></label>
                                 <input type="text" name="address" class="form-control locationInput" placeholder="School Address" value="{{ old('address') }}" required>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="form-label required-label">State</label>
+                                    <label class="form-label required-label">State<span class="text-danger">*</span></label>
                                     <select class="form-control js-example-basic-single" name="state" required style="width: 100%;" onChange="getCity()" id="state">
                                         <option value="">Select state</option>
                                         @foreach ($states as $state)
@@ -53,12 +53,23 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="form-label">City</label>
+                                    <label class="form-label">City<span class="text-danger">*</span></label>
                                     <select class="form-control js-example-basic-single" name="city" required style="width: 100%;" id="city">
                                         <option value="">Select city</option>
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label required-label">School Image<span class="text-danger">*</span></label>
+                                <input type="file" name="image" class="form-control locationInput" id="imageInput" accept="image/*" required>
+                            </div>
+                            
+                            <div class="col-md-12 mb-3 preview">
+                                <img id="image-preview" src="" alt="Image Preview" style="display: none;"/>
+                            </div>
+                            
+                            
                         </div>
                         
                         <div class="row mt-2">
@@ -77,6 +88,25 @@
 @endsection
 @section('script')
 <script>
+document.getElementById('imageInput').addEventListener('change', function() {
+    var imagePreview = document.getElementById('image-preview');
+    var file = this.files[0];
+
+    if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+        }
+
+        reader.readAsDataURL(file);
+    } else {
+        imagePreview.src = '';
+        imagePreview.style.display = '';
+    }
+});
+
 function getCity(){
     let e = document.getElementById('state').value;
     $.ajax({
@@ -95,5 +125,8 @@ function getCity(){
         }
     });
 }
+
+
 </script>
+@endsection
 

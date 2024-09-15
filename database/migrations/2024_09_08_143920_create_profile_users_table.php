@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('profile_users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->integer('address');
+            $table->id();
+            $table->uuid('unique_id');
+            $table->string('address')->nullable();
             $table->bigInteger('user_id');
-            $table->integer('state_id');
-            $table->integer('city_id');
+            $table->integer('state_id')->nullable();
+            $table->integer('city_id')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

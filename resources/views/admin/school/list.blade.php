@@ -50,7 +50,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Sr</th>
-                                    <th scope="col">Unique Id</th>
+                                    
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
@@ -66,9 +66,10 @@
                                            #{{ $loop->iteration }}
                                         </div>
                                     </th>
+                                
                                     <th scope="row">
                                         <div class="d-flex align-items-center">
-                                            {{ $e->id }}
+                                           <img src="{{ $e->profile ? $e->profile->image_url : asset('admin/assets/images/logo.png') }}" width="40" height="40" class="rounded circle">
                                         </div>
                                     </th>
                                     <th scope="row">

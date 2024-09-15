@@ -24,8 +24,15 @@ class User extends Authenticatable
         'phone',
         'password',
         'status',
-        'role_id'
+        'role_id',
+        'unique_id'
     ];
+
+
+    public function profile(){
+        return $this->hasOne(ProfileUser::class,'user_id','id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.
