@@ -28,7 +28,16 @@
     <link href="{{ asset('admin/assets/libs/simplebar/simplebar.min.css') }}" rel="stylesheet" >
 
     <link rel="stylesheet" href="{{ asset('admin/assets/libs/@simonwep/pickr/themes/nano.min.css') }}">
-
+    <style>
+		#image-preview {
+			width: 100px;
+			height: 100px;
+			border: 1px solid gray;
+			object-fit: cover; /* Ensure image fits within dimensions */
+			margin: 0 auto; /* Center horizontally */
+		}
+	
+	</style>
 </head>
 
 <body>
@@ -227,6 +236,7 @@
             $('.toast').toast('show');
         });
     </script>
+	@yield('script')
 </body>
 
 </html>

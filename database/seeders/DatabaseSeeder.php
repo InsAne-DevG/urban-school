@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '8650033948',
             'email' => 'admin@admin.com',
             'image' => 'logo.png',
-            'role_id' => '1',
+            'role_id' => 1,
             'is_edited' => '1',
             'is_deleted' => '1',
             'is_downloadable' => '1',

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\School\SchoolController;
+use App\Http\Middleware\DefaultAuthGuard;
 
 Route::controller(SchoolController::class)->prefix('school')->name('school-')->group(function(){
     
