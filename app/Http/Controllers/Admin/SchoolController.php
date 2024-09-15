@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Str;
-use Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Helper\Helper;
 use App\Models\State;
-use App\Models\ProfileUser;
+use App\Models\UserProfile;
 
 class SchoolController extends Controller
 {
@@ -65,9 +64,9 @@ class SchoolController extends Controller
                 'phone' => $request->phone,
                 'role_id' => '1', // Assigning a role if applicable
             ]);
-            
+
             if($school){
-                ProfileUser::create([
+                UserProfile::create([
                     'id' => (string) Str::uuid(),
                     'address' => $request->address,
                     'state_id' => $request->state, // Assuming you have a relationship with state
@@ -81,5 +80,9 @@ class SchoolController extends Controller
             
         }
         return view('admin.school.create',compact('states'));
+    }
+
+    public function edit(Request $request, User $school) {
+        dd($school);
     }
 }
