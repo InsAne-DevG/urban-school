@@ -62,8 +62,8 @@ class SchoolController extends Controller
                 'email' => $request->email,
                 'password' => $password,
                 'phone' => $request->phone,
-                'role_id' => '1', // Assigning a role if applicable
             ]);
+
 
             if($school){
                 UserProfile::create([
@@ -73,6 +73,8 @@ class SchoolController extends Controller
                     'city_id' => $request->city,   // Assuming you have a relationship with city
                     'user_id' => $school->id
                 ]);
+
+                $school->assignRole('school_admin');
             }
             session()->flash('toast_message', 'School created successfully!');
             

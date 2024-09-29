@@ -9,7 +9,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        $user = User::first();
-        dd($user, $user->id);
+        $gradeLevels = config('global_data.grade_levels');
+        dd($gradeLevels);
     }
 }
